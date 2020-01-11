@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-12"> <h1 class="page-header">Dodaj Zadanie</h1> </div>
+	</div>
+
+	<div class="row"> 
+		<div class="col-lg-12">
+			<form role="form" method="post" autocomplete="off"> {% csrf_token %}
+			
+				{% if errors %}
+					<div class="form-group">
+						{% for error in errors %}
+							<p class="text-danger"><b>{{ error }}</b></p>
+						{% endfor %}	
+					</div>
+				{% endif %}
+			
+				<div class="form-group">
+					<label for="PriorityId">Priorytet</label>
+					<select name="Priority" id="PriorityId" class="form-control">
+						<option>Wysoki</option>
+						<option>Średni</option>
+						<option>Niski</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="TypeId">Rodzaj</label>
+					<select name="Type" id="TypeId" class="form-control">
+						<option>Rodzina</option>
+						<option>Biznes</option>
+						<option>Inne</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="DateId">Data</label>
+					<input type="text" name="Date" class="form-control" id="DateId" placeholder="Wprowadź datę">
+				</div>
+				<div class="form-group">
+					<label for="TaskId">Zadanie</label>
+					<input type="text" name="Task" class="form-control" id="TaskId" placeholder="Wprowadź zadanie">
+				</div>
+			
+				<button type="submit" class="btn btn-primary">Wprowadź</button>
+			</form>
+		</div>
+	</div>
+	
+{% endblock %}
+
+{% block scripts %}
+	<script>
+	$( "#DateId" ).datepicker({ dateFormat: 'yy-mm-dd' });
+	</script>
+{% endblock %}
